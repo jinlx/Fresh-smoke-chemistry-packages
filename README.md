@@ -17,8 +17,8 @@ MATLAB Connector certificates, private keys, MATLAB settings files, tokens, and 
 
 ## Reproducibility options
 
-1. **Fast reproduction (recommended):** download the processed datasets from Zenodo, place them under `processed_data/`, set `USE_PROCESSED = True` in the notebook, and run the notebook from top to bottom.
-2. **Full reproduction:** regenerate the processed datasets from the raw inputs. Contact the authors for access and the required data-use instructions.
+1. The [processed figure notebook](notebooks/processed_figures.ipynb) reads the four compressed CSVs included in this repository and replots the main-text figure data.
+2. The [original analysis notebook](notebooks/OH_TS_Prod_v13_fig.ipynb) also performs upstream processing and uses the full raw inputs. Contact the authors for access and the required data-use instructions.
 
 ## Repository structure
 
@@ -27,8 +27,8 @@ MATLAB Connector certificates, private keys, MATLAB settings files, tokens, and 
 |-- Codes/
 |   |-- matlab/                  # F0AM source, chemistry, mechanisms, and MATLAB setups
 |   `-- Box_modeling_analysis/   # Python analysis, preprocessing, and plotting workflows
-|-- notebooks/                   # Public fast-reproduction notebook(s)
-|-- processed_data/              # Optional local copy of the Zenodo datasets
+|-- notebooks/                   # Processed figure notebook and original analysis notebook
+|-- processed_data/              # Four archived observation and model CSVs
 |-- Respnse/                     # Legacy directory name; do not rename without checking links
 |-- environment.yml              # Conda environment specification
 |-- CITATION.cff                 # Machine-readable paper citation
@@ -38,29 +38,17 @@ MATLAB Connector certificates, private keys, MATLAB settings files, tokens, and 
 
 ## Fast reproduction
 
-1. Create the Conda environment:
+From the repository root, create the environment and open the [processed figure notebook](notebooks/processed_figures.ipynb).
 
-   ```bash
-   conda env create -f environment.yml
-   conda activate oh-smoke
-   ```
+```bash
+conda env create -f environment.yml
+conda activate oh-smoke
+jupyter lab notebooks/processed_figures.ipynb
+```
 
-2. Download the four processed files from Zenodo and place them in `processed_data/`:
+Choose **Run → Run All Cells**. The notebook reads the observation table and three model tables from `processed_data/`. A standard clone includes all four files. If a file is missing, restore the matching `.csv.gz` from the [archived data release](https://doi.org/10.5281/zenodo.18226363).
 
-   ```text
-   all_data_obs.csv.gz
-   all_data_gc.csv.gz
-   all_data_mcm_gcvoc.csv.gz
-   all_data_mcm_bbvoc.csv.gz
-   ```
-
-3. Open `notebooks/OH_TS_Prod_v13_fig.ipynb` and set:
-
-   ```python
-   USE_PROCESSED = True
-   ```
-
-4. Run all cells and save generated figures outside the repository unless they are intentionally selected as release assets.
+The six inline figures cover OH and plume age, radical sources and VOC reactivity, ozone and PAN enhancements, and two ozone-sensitivity diagnostics. The notebook documents the age bins and flight selections and displays model bias and correlation tables. For PAN, it reports sample sizes and R² both for the five archived flight records and for the four flights with PAN measurements.
 
 ## Software environment
 
